@@ -150,27 +150,33 @@ def encrypt():
     # функция с ключём не реализована
     final = " "
     text = input("Enter text to encrypt: ")
-    key = random.randint(0, 256)
+    key1 = random.randint(0, 256)
+    key2 = random.randint(0, 256)
+    key3 = random.randint(0, 256)
     for i in range(len(text)):
         current_symbol = text[i]
         try:
-            final += str(symbols[current_symbol] * key + key*4) + " "
+            final += str(symbols[current_symbol] * key1 + key2*4 -key3) + " "
         except KeyError:
             print("ошибка в введённых данных")
     print(final+"\n Encrypted")
-    print("Key is:" + str(key))
+    print("First key is:" + str(key1))
+    print("Second key is:" + str(key2))
+    print("Third key is:" + str(key3))
     l = input("press enter")
 
 
 def decrypt(current_symbol="", decrypted_text=""):
     text = input("Enter text to decrypt: ") + " "
-    key = int(input("input key: "))
+    key1 = int(input("input first key: "))
+    key2 = int(input("input second key: "))
+    key3 = int(input("input third key: "))
     for i in range(len(text)):
         if text[i] != " ":
             current_symbol += str(text[i])
         else:
             try:
-                current_symbol_decrypted = (int(current_symbol) - key*4) / key
+                current_symbol_decrypted = (int(current_symbol) + key3 - key2*4) / key1
                 decrypted_text += str(definitions[int(current_symbol_decrypted)])
                 current_symbol = ""
             except TypeError:
