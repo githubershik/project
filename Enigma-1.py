@@ -264,7 +264,7 @@ def decrypt(current_symbol="", decrypted_text=""):
             except TypeError:
                 print("ошибка в введёных данных")
             except ValueError:
-                print("произошла ошибка")
+                pass
             except KeyError:
                 print("ошибка в введённых данных")
 
