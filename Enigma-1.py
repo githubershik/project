@@ -227,14 +227,59 @@ definitions = {
         72:     "0"
 }
 
+key_defs = {
+    "w":    7,
+    "x":    17,
+    "m":    22,
+    "k":    34,
+    "l":    3
+}
+
+def_keys = {
+    7:      "w",
+    17:     "x",
+    22:     "m",
+    34:     "k",
+    3:      "l"
+}
+
+def chargen(key):
+    Fkey = ""
+    if key <= 2:
+        Fkey = "w"
+    elif key > 2 and key<=4:
+        Fkey = "x"
+    elif key>4 and key<=6:
+        Fkey = "m"
+    elif key>6 and key<=8:
+        Fkey = "k"
+    elif key>8 and key<=10:
+        Fkey = "l"
+    return Fkey
+
+
+def keygen(key1,key2,key3,key1l,key2l,key3l):
+    k1 = chargen(key1l)
+    k2 = chargen(key2l)
+    k3 = chargen(key3l)
+    enc_key1 = key1*key1l-key2l
+    enc_key2 = (key2+key2l)-key3l
+    enc_key3 = (key3-key3l)*key1l
+    FinKey = str(enc_key1) + k1 + str(enc_key2) + k2 + str(enc_key3) + k3 
+    return FinKey
+
 
 def encrypt():
     # функция с ключём не реализована
     final = " "
     text = input("Enter text to encrypt: ")
-    key1 = random.randint(0, 256)
-    key2 = random.randint(0, 256)
-    key3 = random.randint(0, 256)
+    key1 = random.randint(1, 256)
+    key2 = random.randint(1, 256)
+    key3 = random.randint(1, 256)
+    key_let1 = random.randint(1, 10)
+    key_let2 = random.randint(1, 10)
+    key_let3 = random.randint(1, 10)
+    FinKey = keygen(key1,key2,key3,key_let1,key_let2,key_let3)
     for i in range(len(text)):
         current_symbol = text[i]
         try:
@@ -242,9 +287,7 @@ def encrypt():
         except KeyError:
             print("ошибка в введённых данных")
     print(final+"\n Encrypted")
-    print("First key is:" + str(key1))
-    print("Second key is:" + str(key2))
-    print("Third key is:" + str(key3))
+    print("Key is: ",FinKey)
     l = input("press enter")
 
 
