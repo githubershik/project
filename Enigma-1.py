@@ -227,22 +227,6 @@ definitions = {
         72:     "0"
 }
 
-key_defs = {
-    "w":    7,
-    "x":    17,
-    "m":    22,
-    "k":    34,
-    "l":    3
-}
-
-def_keys = {
-    7:      "w",
-    17:     "x",
-    22:     "m",
-    34:     "k",
-    3:      "l"
-}
-
 def chargen(key):
     Fkey = ""
     if key == 1:
@@ -271,7 +255,6 @@ def chardegen(key):
         Fkey = 5
     return Fkey
 
-
 def keygen(key1,key2,key3,key1l,key2l,key3l):
     k1 = chargen(key1l)
     k2 = chargen(key2l)
@@ -294,32 +277,20 @@ def keydegen(key):
         if key[i] != "w" and key[i] != "m" and key[i] != "k" and key[i] != "x" and key[i] != "l":
             if len(let) == 0:
                 dec_key1+=(key[i])
-                print(dec_key1,key[i],"1")
             elif len(let) == 1:
                 dec_key2+=(key[i])
-                print(dec_key2,key[i],"2")
             elif len(let) == 2:
                 dec_key3+=(key[i])
-                print(dec_key3,key[i],"3")
         else:
             let.append(key[i])
     for i in range(len(let)):
         dec_let.append(chardegen(let[i]))
-    print(dec_let)
-    print(dec_key1)
-    print(dec_key2)
-    print(dec_key3)
     dec_key1 = (int(dec_key1) + int(dec_let[1])) / int(dec_let[0])
     dec_key2 = (int(dec_key2) + int(dec_let[2])) - int(dec_let[1])
     dec_key3 = (int(dec_key3) / int(dec_let[0])) + int(dec_let[2])
-    print(dec_key1)
-    print(dec_key2)
-    print(dec_key3)
     numb.append(int(dec_key1))
     numb.append(int(dec_key2))
     numb.append(int(dec_key3))
-    print(numb)
-    print(dec_let[0],dec_let[1],dec_let[2])
 
 def encrypt():
     # функция с ключём не реализована
@@ -340,9 +311,7 @@ def encrypt():
             print("ошибка в введённых данных")
     print(final+"\n Encrypted")
     print("Key is: ",FinKey)
-    print(key1,key2,key3,key_let1,key_let2,key_let3)
     l = input("press enter")
-
 
 def decrypt(current_symbol="", decrypted_text=""):
     text = input("Enter text to decrypt: ") + " "
@@ -365,18 +334,13 @@ def decrypt(current_symbol="", decrypted_text=""):
 
     print(decrypted_text+"\n Decrypted")
     l = input("press enter")
-    
-def beta():
-    m = input("key:")
-    keydegen(m)
 
-choose = int(input("1.Encrypt \n2.Decrypt\n3.beta\n"))
+choose = int(input("1.Encrypt \n2.Decrypt\n"))
 
 if choose == 1:
     encrypt()
 elif choose == 2:
     decrypt()
-elif choose == 3:
-    beta()
+
 else:
     print("write 1 or 2")
