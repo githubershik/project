@@ -293,7 +293,24 @@ def keydegen(key):
     numb.append(int(dec_key3))
 
 def encrypt():
-    # функция с ключём не реализована
+    # функция с ключём не реализована(реализация 15.02.24)
+    quest = input("Введите ключ шифрования(если отсутствует - оставьте поле пустым):")
+    if quest == "":
+        pass
+    else:
+        final = ""
+        FinKey = quest
+        keydegen(FinKey)
+        text = input("Enter text to encrypt: ")
+        for i in range(len(text)):
+            current_symbol = text[i]
+            try:
+                final += str(symbols[current_symbol] * numb[0] + numb[1] * 4 - numb[2]) + " "
+            except KeyError:
+                print("ошибка в введённых данных")
+        print(final+"\n Encrypted")
+        l = input("press enter")
+
     final = " "
     text = input("Enter text to encrypt: ")
     key1 = random.randint(1, 256)
