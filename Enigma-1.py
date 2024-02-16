@@ -301,18 +301,18 @@ def encrypt():
         final = ""
         FinKey = quest
         keydegen(FinKey)
-        text = input("Enter text to encrypt: ")
+        text = input("Введите текст: ")
         for i in range(len(text)):
             current_symbol = text[i]
             try:
                 final += str(symbols[current_symbol] * numb[0] + numb[1] * 4 - numb[2]) + " "
             except KeyError:
                 print("ошибка в введённых данных")
-        print(final+"\n Encrypted")
-        l = input("press enter")
+        print(final+"\n Зашифровано")
+        l = input("Нажмите Enter")
 
     final = " "
-    text = input("Enter text to encrypt: ")
+    text = input("Введите текст: ")
     key1 = random.randint(1, 256)
     key2 = random.randint(1, 256)
     key3 = random.randint(1, 256)
@@ -326,13 +326,13 @@ def encrypt():
             final += str(symbols[current_symbol] * key1 + key2*4 -key3) + " "
         except KeyError:
             print("ошибка в введённых данных")
-    print(final+"\n Encrypted")
-    print("Key is: ",FinKey)
-    l = input("press enter")
+    print(final+"\n Зашифровано")
+    print("Ключ: ",FinKey)
+    l = input("Нажмите Enter")
 
 def decrypt(current_symbol="", decrypted_text=""):
-    text = input("Enter text to decrypt: ") + " "
-    key = input("input key: ")
+    text = input("Введите текст: ") + " "
+    key = input("Введите ключ: ")
     keydegen(key)
     for i in range(len(text)):
         if text[i] != " ":
@@ -349,15 +349,14 @@ def decrypt(current_symbol="", decrypted_text=""):
             except KeyError:
                 print("ошибка в введённых данных")
 
-    print(decrypted_text+"\n Decrypted")
-    l = input("press enter")
+    print(decrypted_text+"\n Дешифровано")
+    l = input("Нажмите Enter")
 
-choose = int(input("1.Encrypt \n2.Decrypt\n"))
+choose = int(input("1.Шифрование \n2.Дешифрование\n"))
 
 if choose == 1:
     encrypt()
 elif choose == 2:
     decrypt()
-
 else:
-    print("write 1 or 2")
+    print("Введите 1 или 2")
