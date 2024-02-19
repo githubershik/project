@@ -239,6 +239,16 @@ def chargen(key):
         Fkey = "k"
     elif key == 5:
         Fkey = "l"
+    elif key == 6:
+        Fkey = "a"
+    elif key == 7:
+        Fkey = "z"
+    elif key == 8:
+        Fkey = "c"
+    elif key == 9:
+        Fkey = "u"
+    elif key == 10:
+        Fkey = "t"
     return Fkey
 
 def chardegen(key):
@@ -253,6 +263,16 @@ def chardegen(key):
         Fkey = 4
     elif key == "l":
         Fkey = 5
+    elif key == "a":
+        Fkey = 6
+    elif key == "z":
+        Fkey = 7
+    elif key == "c":
+        Fkey = 8
+    elif key == "u":
+        Fkey = 9
+    elif key == "t":
+        Fkey= 10
     return Fkey
 
 def keygen(key1,key2,key3,key1l,key2l,key3l):
@@ -274,7 +294,7 @@ def keydegen(key):
     dec_key2 = ""
     dec_key3 = ""
     for i in range(len(key)):
-        if key[i] != "w" and key[i] != "m" and key[i] != "k" and key[i] != "x" and key[i] != "l":
+        if key[i] != "w" and key[i] != "m" and key[i] != "k" and key[i] != "x" and key[i] != "l" and   key[i] != "z" and key[i] != "c" and key[i] != "t" and key[i] != "u" and key[i] != "a":
             if len(let) == 0:
                 dec_key1+=(key[i])
             elif len(let) == 1:
@@ -316,9 +336,9 @@ def encrypt():
     key1 = random.randint(1, 256)
     key2 = random.randint(1, 256)
     key3 = random.randint(1, 256)
-    key_let1 = random.randint(1,5)
-    key_let2 = random.randint(1,5)
-    key_let3 = random.randint(1,5)
+    key_let1 = random.randint(1,10)
+    key_let2 = random.randint(1,10)
+    key_let3 = random.randint(1,10)
     FinKey = keygen(key1,key2,key3,key_let1,key_let2,key_let3)
     for i in range(len(text)):
         current_symbol = text[i]
