@@ -1,3 +1,4 @@
+#словарь для шифрования
 import random
 symbols = {
         "1":    7,
@@ -142,6 +143,7 @@ symbols = {
         "'":    74,
         '"':    104
 }
+#словарь для дешифрования
 definitions = {
         9:      "a", 
         93:     "b",
@@ -226,7 +228,7 @@ definitions = {
         88:     "9",
         72:     "0"
 }
-
+#генерация букв
 def chargen(key):
     Fkey = ""
     if key == 1:
@@ -251,6 +253,7 @@ def chargen(key):
         Fkey = "t"
     return Fkey
 
+#дешифрование букв
 def chardegen(key):
     Fkey = ""
     if key == "w":
@@ -275,16 +278,20 @@ def chardegen(key):
         Fkey= 10
     return Fkey
 
+#алгоритм создания ключа
 def keygen(key1,key2,key3,key1l,key2l,key3l):
     k1 = chargen(key1l)
     k2 = chargen(key2l)
     k3 = chargen(key3l)
+    #шифрование компонентов
     enc_key1 = (key1*key1l)-key2l
     enc_key2 = (key2+key2l)-key3l
     enc_key3 = (key3-key3l)*key1l
+    #создание ключа
     FinKey = str(enc_key1) + k1 + str(enc_key2) + k2 + str(enc_key3) + k3 
     return FinKey
 
+#алгоритм дешифрования ключа
 def keydegen(key): 
     global numb
     numb = []
@@ -293,6 +300,7 @@ def keydegen(key):
     dec_key1 = ""
     dec_key2 = ""
     dec_key3 = ""
+    #разделение компонентов ключа
     for i in range(len(key)):
         if key[i] != "w" and key[i] != "m" and key[i] != "k" and key[i] != "x" and key[i] != "l" and   key[i] != "z" and key[i] != "c" and key[i] != "t" and key[i] != "u" and key[i] != "a":
             if len(let) == 0:
@@ -305,6 +313,7 @@ def keydegen(key):
             let.append(key[i])
     for i in range(len(let)):
         dec_let.append(chardegen(let[i]))
+    #возврат ключа в первоначальную форму
     dec_key1 = (int(dec_key1) + int(dec_let[1])) / int(dec_let[0])
     dec_key2 = (int(dec_key2) + int(dec_let[2])) - int(dec_let[1])
     dec_key3 = (int(dec_key3) / int(dec_let[0])) + int(dec_let[2])
@@ -312,12 +321,13 @@ def keydegen(key):
     numb.append(int(dec_key2))
     numb.append(int(dec_key3))
 
+#основная функция #1(шифрование)
 def encrypt():
-    # функция с ключём не реализована(реализация 15.02.24)
     quest = input("Введите ключ шифрования(если отсутствует - оставьте поле пустым):")
     if quest == "":
         pass
     else:
+        #работа с заранее прописаным ключом
         final = ""
         FinKey = quest
         keydegen(FinKey)
@@ -330,19 +340,22 @@ def encrypt():
                 print("ошибка в введённых данных")
         print(final+"\n Зашифровано")
         l = input("Нажмите Enter")
-
+    #работа с рандомной генерацией ключа
     final = " "
     text = input("Введите текст: ")
+    #генерация компонентов ключа
     key1 = random.randint(1, 256)
     key2 = random.randint(1, 256)
     key3 = random.randint(1, 256)
     key_let1 = random.randint(1,10)
     key_let2 = random.randint(1,10)
     key_let3 = random.randint(1,10)
+    #создание ключа
     FinKey = keygen(key1,key2,key3,key_let1,key_let2,key_let3)
     for i in range(len(text)):
         current_symbol = text[i]
         try:
+            #шифрование текста
             final += str(symbols[current_symbol] * key1 + key2*4 -key3) + " "
         except KeyError:
             print("ошибка в введённых данных")
@@ -350,15 +363,18 @@ def encrypt():
     print("Ключ: ",FinKey)
     l = input("Нажмите Enter")
 
+#основная функция #2 (дешифрование)
 def decrypt(current_symbol="", decrypted_text=""):
     text = input("Введите текст: ") + " "
     key = input("Введите ключ: ")
+    #дешифрование ключа
     keydegen(key)
     for i in range(len(text)):
         if text[i] != " ":
             current_symbol += str(text[i])
         else:
             try:
+                #дешифрование текста
                 current_symbol_decrypted = (int(current_symbol) + numb[2] - numb[1]*4) / numb[0]
                 decrypted_text += str(definitions[int(current_symbol_decrypted)])
                 current_symbol = ""
